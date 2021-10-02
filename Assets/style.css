@@ -43,9 +43,14 @@ li{
     display: none;
 }
 
-#button_city{
+.button_city{
     background: rgb(111, 145, 209);
     border-radius: 4px;
     color: white;
     padding: 5px 0 5px 0;
+}
+
+.icon{
+    width: 40px;
+    height: 40px;
 }
