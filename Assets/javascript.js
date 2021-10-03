@@ -1,3 +1,5 @@
+const parse_saved_cities = JSON.parse(localStorage.getItem('city'));
+
 const input_cities = document.querySelector('#input_cities')
 const cities_chosen_div = document.querySelector('#cities_chosen_div')
 const cities_chosen_button = document.querySelector('#cities_chosen_button')
@@ -8,6 +10,20 @@ const temp = document.querySelector('#temp');
 const wind = document.querySelector('#wind');
 const humidity = document.querySelector('#humidity');
 const uv_index = document.querySelector('#uv_index');
+
+const cities_saved = []
+
+get_cities_saved()
+
+function get_cities_saved(){
+  for (i = 0; i < parse_saved_cities.length; i++){
+    var button_cities = document.createElement('button');
+    button_cities.classList.add('get');
+    button_cities.setAttribute('data-value', parse_saved_cities[i].texts);
+    button_cities.textContent = parse_saved_cities[i].texts;
+    cities_chosen_div.append(button_cities);
+  }
+}
 
 // Adding the autocomplete on the input
 $( function() {
@@ -21,11 +37,20 @@ function get_city(){
 // Getting the value from the input and taking out all the space that user could put
   var city = input_cities.value.trim();
   var button_cities = document.createElement('button');
+  button_cities.classList.add('get')
   button_cities.textContent = city;
   cities_chosen_div.append(button_cities);
 
-  button_cities.setAttribute('data-value', city)
-  input_cities.value = ''
+  button_cities.setAttribute('data-value', city);
+
+  var object_city = {
+    texts: city
+  }
+
+  cities_saved.push(object_city);
+  localStorage.setItem('city', JSON.stringify(cities_saved));
+
+  input_cities.value = '';
 
   const url_api_weather = ('http://api.openweathermap.org/data/2.5/forecast?id=524901&appid=6086d1f039acf014abeacd1138429b35&units=imperial&q='+city+',EUA')
 // Getting the data from the weather API using the input value
@@ -36,22 +61,6 @@ function get_city(){
     .then(function (data){
       return get_wheater(data);
   })
-
-  button_cities.addEventListener('click', get_city_chosen);
-
-  function get_city_chosen() {
-    var button_cities_attribute = button_cities.getAttribute('data-value')
-    city = button_cities_attribute
-    const url_api_weather = ('http://api.openweathermap.org/data/2.5/forecast?id=524901&appid=6086d1f039acf014abeacd1138429b35&units=imperial&q='+city+',EUA')
-    // Getting the data from the weather API using the input value
-      fetch(url_api_weather)
-        .then(function (response){
-          return response.json();
-      })
-        .then(function (data){
-          return get_wheater(data);
-      })
-    }
 }
 
 function get_wheater(data){
@@ -145,3 +154,20 @@ function get_wheater_5(data){
 
 // Calling the get_wheater function after click on the button
 button_city.addEventListener('click', get_city);
+
+var button_get = document.querySelector('.get');
+button_get.addEventListener('click', get_city_chosen);
+
+function get_city_chosen() {
+  var button_cities_attribute = button_get.getAttribute('data-value')
+  city = button_cities_attribute
+  const url_api_weather = ('http://api.openweathermap.org/data/2.5/forecast?id=524901&appid=6086d1f039acf014abeacd1138429b35&units=imperial&q='+city+',EUA')
+  // Getting the data from the weather API using the input value
+    fetch(url_api_weather)
+      .then(function (response){
+        return response.json();
+    })
+      .then(function (data){
+        return get_wheater(data);
+    })
+}
