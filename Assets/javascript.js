@@ -9,9 +9,6 @@ const wind = document.querySelector('#wind');
 const humidity = document.querySelector('#humidity');
 const uv_index = document.querySelector('#uv_index');
 
-
-
-
 // Adding the autocomplete on the input
 $( function() {
     var availableTags = ['Orlando', 'Atlanta', 'Denver', 'New York', 'Boston', 'Chicago'];
@@ -39,7 +36,6 @@ function get_city(){
 }
 
 function get_wheater(data){
-  console.log(data)
   city_name.innerHTML = data.city.name+' '+moment().format("(MM-DD-YYYY)");  
   
   temp.innerHTML = ' '+data.list[0].main.temp+'ºF'
@@ -47,23 +43,87 @@ function get_wheater(data){
   humidity.innerHTML = ' '+data.list[0].main.humidity+'%'
   uv_index.innerHTML = ' '+'pending'
 
-  if (data.list[0].weather[0].description = "clear sky"){
-    var img_h2 = img_weather_today.setAttribute('src', 'Assets/weather-icons/svg/wi-day-sunny.svg')
+  if (data.list[0].weather[0].main == "Clear"){
+    img_weather_today.classList.remove('hide')
+    img_weather_today.setAttribute('src', 'Assets/weather-icons/day.svg')
+    img_weather_today.setAttribute('alt', 'clear wheater')
+    
+  } else if (data.list[0].weather[0].description == "broken clouds"){
+    img_weather_today.classList.remove('hide')
+    img_weather_today.setAttribute('src', 'Assets/weather-icons/cloudy-day-1.svg')
+    img_weather_today.setAttribute('alt', 'broken clouds')
+  
+  } else if (data.list[0].weather[0].main == "Clouds"){
+    img_weather_today.classList.remove('hide')
+    img_weather_today.setAttribute('src', 'Assets/weather-icons/cloudy.svg')
+    img_weather_today.setAttribute('alt', 'clouds')
+  
+  } else if (data.list[0].weather[0].main == "Rain"){
+    img_weather_today.classList.remove('hide')
+    img_weather_today.setAttribute('src', 'Assets/weather-icons/rainy-6.svg')
+    img_weather_today.setAttribute('alt', 'rain')
+  
+  } else if (data.list[0].weather[0].main == "Snow"){
+    img_weather_today.classList.remove('hide')
+    img_weather_today.setAttribute('src', 'Assets/weather-icons/snowy-5.svg')
+    img_weather_today.setAttribute('alt', 'snow')
+  
+  } else{
+    img_weather_today.classList.remove('hide')
+    img_weather_today.setAttribute('src', 'Assets/weather-icons/thunder.svg')
+    img_weather_today.setAttribute('alt', 'extreme')
   }
-
-  if (data.list[0].weather[0].main = "broken clouds"){
-    var img_h2 = img_weather_today.setAttribute('src', 'Assets/weather-icons/svg/wi-day-sunny.svg')
-  }
-
-  if (data.list[0].weather[0].description = "clear sky"){
-    var img_h2 = img_weather_today.setAttribute('src', 'Assets/weather-icons/svg/wi-day-sunny.svg')
-  }
-
-  if (data.list[0].weather[0].description = "clear sky"){
-    var img_h2 = img_weather_today.setAttribute('src', 'Assets/weather-icons/svg/wi-day-sunny.svg')
-  }
-  // img_weather_today.setAttribute('src', )
+  get_wheater_5(data)
 }
+
+function get_wheater_5(data){
+  console.log(data)
+  for (i = 1; i <= 5; i++){
+      var time_5 = document.querySelector('#time'+[i]);
+      time_5.textContent = moment().add([i],'days').format("MM/DD/YYYY");
+      
+      var temp_5 = document.querySelector('#temp'+[i]);
+      var wind_5 = document.querySelector('#wind'+[i]);
+      var humidity_5 = document.querySelector('#humidity'+[i]) ;
+      var img_5 = document.querySelector('#img'+[i]) ;
+
+      temp_5.textContent = ` ${data.list[i*7].main.temp} ºF`;
+      wind_5.textContent = ` ${data.list[i*7].wind.speed} MPH`;
+      humidity_5.textContent = ` ${data.list[i*7].main.humidity} %`;
+
+      if (data.list[i*7].weather[0].main == "Clear"){
+        img_5.classList.remove('hide')
+        img_5.setAttribute('src', 'Assets/weather-icons/day.svg')
+        img_5.setAttribute('alt', 'clear wheater')
+        
+      } else if (data.list[i*7].weather[0].main == "broken clouds"){
+        img_5.classList.remove('hide')
+        img_5.setAttribute('src', 'Assets/weather-icons/cloudy-day-1.svg')
+        img_5.setAttribute('alt', 'broken clouds')
+      
+      } else if (data.list[i*7].weather[0].main == "Clouds"){
+        img_5.classList.remove('hide')
+        img_5.setAttribute('src', 'Assets/weather-icons/cloudy.svg')
+        img_5.setAttribute('alt', 'clouds')
+      
+      } else if (data.list[i*7].weather[0].main == "Rain"){
+        img_5.classList.remove('hide')
+        img_5.setAttribute('src', 'Assets/weather-icons/rainy-6.svg')
+        img_5.setAttribute('alt', 'rain')
+      
+      } else if (data.list[i*7].weather[0].main == "Snow"){
+        img_5.classList.remove('hide')
+        img_5.setAttribute('src', 'Assets/weather-icons/snowy-5.svg')
+        img_5.setAttribute('alt', 'snow')
+      
+      } else{
+        img_5.classList.remove('hide')
+        img_5.setAttribute('src', 'Assets/weather-icons/thunder.svg')
+        img_5.setAttribute('alt', 'extreme')
+      }
+  }
+}
+
 
 // Calling the get_wheater function after click on the button
 button_city.addEventListener('click', get_city);
