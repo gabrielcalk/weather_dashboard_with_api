@@ -22,7 +22,10 @@ function get_city(){
   var city = input_cities.value.trim();
   var button_cities = document.createElement('button');
   button_cities.textContent = city;
-  cities_chosen_div.append(button_cities)
+  cities_chosen_div.append(button_cities);
+
+  button_cities.setAttribute('data-value', city)
+  input_cities.value = ''
 
   const url_api_weather = ('http://api.openweathermap.org/data/2.5/forecast?id=524901&appid=6086d1f039acf014abeacd1138429b35&units=imperial&q='+city+',EUA')
 // Getting the data from the weather API using the input value
@@ -33,6 +36,22 @@ function get_city(){
     .then(function (data){
       return get_wheater(data);
   })
+
+  button_cities.addEventListener('click', get_city_chosen);
+
+  function get_city_chosen() {
+    var button_cities_attribute = button_cities.getAttribute('data-value')
+    city = button_cities_attribute
+    const url_api_weather = ('http://api.openweathermap.org/data/2.5/forecast?id=524901&appid=6086d1f039acf014abeacd1138429b35&units=imperial&q='+city+',EUA')
+    // Getting the data from the weather API using the input value
+      fetch(url_api_weather)
+        .then(function (response){
+          return response.json();
+      })
+        .then(function (data){
+          return get_wheater(data);
+      })
+    }
 }
 
 function get_wheater(data){
@@ -123,7 +142,6 @@ function get_wheater_5(data){
       }
   }
 }
-
 
 // Calling the get_wheater function after click on the button
 button_city.addEventListener('click', get_city);
