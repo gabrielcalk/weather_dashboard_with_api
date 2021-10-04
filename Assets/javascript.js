@@ -72,7 +72,7 @@ function get_city(){
   input_cities.value = '';
 
 // Getting the data from the weather API using the input value
-  const url_api_weather = ('http://api.openweathermap.org/data/2.5/forecast?id=524901&appid=6086d1f039acf014abeacd1138429b35&units=imperial&q='+city+',EUA')
+  const url_api_weather = ('https://api.openweathermap.org/data/2.5/forecast?id=524901&appid=6086d1f039acf014abeacd1138429b35&units=imperial&q='+city+',EUA')
   fetch(url_api_weather)
     .then(function (response){
       return response.json();
@@ -180,7 +180,7 @@ function get_city_chosen(e) {
   city = button_cities_attribute
 
 // Adding the var city to the API and getting the weather of the city
-  const url_api_weather = ('http://api.openweathermap.org/data/2.5/forecast?id=524901&appid=6086d1f039acf014abeacd1138429b35&units=imperial&q='+city+',EUA')
+  const url_api_weather = ('https://api.openweathermap.org/data/2.5/forecast?id=524901&appid=6086d1f039acf014abeacd1138429b35&units=imperial&q='+city+',EUA')
 
   // Getting the data from the weather API using the input value
     fetch(url_api_weather)
