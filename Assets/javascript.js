@@ -101,27 +101,27 @@ function get_wheater(data){
   // Adding the image that best represents the general weather of the day
   if (data.list[0].weather[0].main == "Clear"){
     img_weather_today.classList.remove('hide');
-    img_weather_today.setAttribute('src', 'Assets/weather-icons/sun.png');
+    img_weather_today.setAttribute('src', 'Assets/images/sun.png');
     img_weather_today.setAttribute('alt', 'clear wheater');
   
   } else if (data.list[0].weather[0].main == "Clouds"){
     img_weather_today.classList.remove('hide');
-    img_weather_today.setAttribute('src', 'Assets/weather-icons/cloudy.png');
+    img_weather_today.setAttribute('src', 'Assets/images/cloudy.png');
     img_weather_today.setAttribute('alt', 'clouds');
   
   } else if (data.list[0].weather[0].main == "Rain"){
     img_weather_today.classList.remove('hide');
-    img_weather_today.setAttribute('src', 'Assets/weather-icons/rain.png');
+    img_weather_today.setAttribute('src', 'Assets/images/rain.png');
     img_weather_today.setAttribute('alt', 'rain');
   
   } else if (data.list[0].weather[0].main == "Snow"){
     img_weather_today.classList.remove('hide');
-    img_weather_today.setAttribute('src', 'Assets/weather-icons/snowy.png');
+    img_weather_today.setAttribute('src', 'Assets/images/snowy.png');
     img_weather_today.setAttribute('alt', 'snow');
   
   } else{
     img_weather_today.classList.remove('hide');
-    img_weather_today.setAttribute('src', 'Assets/weather-icons/extreme.png');
+    img_weather_today.setAttribute('src', 'Assets/images/extreme.png');
     img_weather_today.setAttribute('alt', 'extreme');
   }
 
@@ -148,27 +148,27 @@ function get_wheater_5(data){
 // Adding the image that best represents the general weather of the day
       if (data.list[i*7].weather[0].main == "Clear"){
         img_5.classList.remove('hide');
-        img_5.setAttribute('src', 'Assets/weather-icons/sun.png');
+        img_5.setAttribute('src', 'Assets/images/sun.png');
         img_5.setAttribute('alt', 'clear wheater');
       
       } else if (data.list[i*7].weather[0].main == "Clouds"){
         img_5.classList.remove('hide');
-        img_5.setAttribute('src', 'Assets/weather-icons/cloudy.png');
+        img_5.setAttribute('src', 'Assets/images/cloudy.png');
         img_5.setAttribute('alt', 'clouds');
       
       } else if (data.list[i*7].weather[0].main == "Rain"){
         img_5.classList.remove('hide');
-        img_5.setAttribute('src', 'Assets/weather-icons/rain.png');
+        img_5.setAttribute('src', 'Assets/images/rain.png');
         img_5.setAttribute('alt', 'rain');
       
       } else if (data.list[i*7].weather[0].main == "Snow"){
         img_5.classList.remove('hide');
-        img_5.setAttribute('src', 'Assets/weather-icons/snowy.png');
+        img_5.setAttribute('src', 'Assets/images/snowy.png');
         img_5.setAttribute('alt', 'snow');
       
       } else{
         img_5.classList.remove('hide');
-        img_5.setAttribute('src', 'Assets/weather-icons/extreme.png');
+        img_5.setAttribute('src', 'Assets/images/extreme.png');
         img_5.setAttribute('alt', 'extreme');
       }
   }
