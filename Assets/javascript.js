@@ -1,9 +1,9 @@
 // Parsing the values that is on the local storage
 const parse_saved_cities = JSON.parse(localStorage.getItem('city'));
 
-const input_cities = document.querySelector('#input_cities')
-const cities_chosen_div = document.querySelector('#cities_chosen_div')
-const cities_chosen_button = document.querySelector('#cities_chosen_button')
+const input_cities = document.querySelector('#input_cities');
+const cities_chosen_div = document.querySelector('#cities_chosen_div');
+const cities_chosen_button = document.querySelector('#cities_chosen_button');
 
 const city_name = document.querySelector('#city_name');
 const img_weather_today = document.querySelector('#img_weather_today');
@@ -13,7 +13,7 @@ const humidity = document.querySelector('#humidity');
 const uv_index = document.querySelector('#uv_index');
 
 // Array that contain the city that have been chosen
-const cities_saved = []
+const cities_saved = [];
 
 // Ff the value on the local storage is differente than null, then active the get_cities_saved function
 if (parse_saved_cities !== null){
@@ -45,9 +45,9 @@ $( function() {
 // Checking if the input value is not a number or null, if it is, then pop up one alert saying that suppose to be one valid city on EUA
 function get_city(){
   if (input_cities.value == ''){
-    alert('Please, insert one city on EUA')
+    alert('Please, insert one city on EUA');
   } else if (!isNaN(input_cities.value)){
-    alert('Insert one city on EUA')
+    alert('Insert one city on EUA');
   } else {
 
 // Getting the value from the input and taking out all the space that user could put
@@ -75,11 +75,15 @@ function get_city(){
   const url_api_weather = ('https://api.openweathermap.org/data/2.5/forecast?id=524901&appid=6086d1f039acf014abeacd1138429b35&units=imperial&q='+city+',EUA')
   fetch(url_api_weather)
     .then(function (response){
+// from stackoverflow: https://stackoverflow.com/questions/38235715/fetch-reject-promise-and-catch-the-error-if-status-is-not-ok
+      if (!response.ok) {
+        alert('API error');
+      }
       return response.json();
-  })
+    })
     .then(function (data){
       return get_wheater(data);
-  })
+    })
   }
 }
 
@@ -89,40 +93,40 @@ function get_wheater(data){
   city_name.innerHTML = data.city.name+' '+moment().format("(MM-DD-YYYY)");  
 
 // Adding the temp, wind, humidity and uv_index about today on the dom
-  temp.innerHTML = ' '+data.list[0].main.temp+'ºF'
-  wind.innerHTML = ' '+data.list[0].wind.speed+' MPH'
-  humidity.innerHTML = ' '+data.list[0].main.humidity+'%'
-  uv_index.innerHTML = ' '+'pending'
+  temp.innerHTML = ' '+data.list[0].main.temp+'ºF';
+  wind.innerHTML = ' '+data.list[0].wind.speed+' MPH';
+  humidity.innerHTML = ' '+data.list[0].main.humidity+'%';
+  uv_index.innerHTML = ' '+'pending';
 
   // Adding the image that best represents the general weather of the day
   if (data.list[0].weather[0].main == "Clear"){
-    img_weather_today.classList.remove('hide')
-    img_weather_today.setAttribute('src', 'Assets/weather-icons/sun.png')
-    img_weather_today.setAttribute('alt', 'clear wheater')
+    img_weather_today.classList.remove('hide');
+    img_weather_today.setAttribute('src', 'Assets/weather-icons/sun.png');
+    img_weather_today.setAttribute('alt', 'clear wheater');
   
   } else if (data.list[0].weather[0].main == "Clouds"){
-    img_weather_today.classList.remove('hide')
-    img_weather_today.setAttribute('src', 'Assets/weather-icons/cloudy.png')
-    img_weather_today.setAttribute('alt', 'clouds')
+    img_weather_today.classList.remove('hide');
+    img_weather_today.setAttribute('src', 'Assets/weather-icons/cloudy.png');
+    img_weather_today.setAttribute('alt', 'clouds');
   
   } else if (data.list[0].weather[0].main == "Rain"){
-    img_weather_today.classList.remove('hide')
-    img_weather_today.setAttribute('src', 'Assets/weather-icons/rain.png')
-    img_weather_today.setAttribute('alt', 'rain')
+    img_weather_today.classList.remove('hide');
+    img_weather_today.setAttribute('src', 'Assets/weather-icons/rain.png');
+    img_weather_today.setAttribute('alt', 'rain');
   
   } else if (data.list[0].weather[0].main == "Snow"){
-    img_weather_today.classList.remove('hide')
-    img_weather_today.setAttribute('src', 'Assets/weather-icons/snowy.png')
-    img_weather_today.setAttribute('alt', 'snow')
+    img_weather_today.classList.remove('hide');
+    img_weather_today.setAttribute('src', 'Assets/weather-icons/snowy.png');
+    img_weather_today.setAttribute('alt', 'snow');
   
   } else{
-    img_weather_today.classList.remove('hide')
-    img_weather_today.setAttribute('src', 'Assets/weather-icons/extreme.png')
-    img_weather_today.setAttribute('alt', 'extreme')
+    img_weather_today.classList.remove('hide');
+    img_weather_today.setAttribute('src', 'Assets/weather-icons/extreme.png');
+    img_weather_today.setAttribute('alt', 'extreme');
   }
 
 // After adding the Image, then pass the data from the api to another function to add the next 5 days weather
-  get_wheater_5(data)
+  get_wheater_5(data);
 }
 
 function get_wheater_5(data){
@@ -134,7 +138,7 @@ function get_wheater_5(data){
 // Selecting the temp, wind, humidity and image from the html file
       var temp_5 = document.querySelector('#temp'+[i]);
       var wind_5 = document.querySelector('#wind'+[i]);
-      var humidity_5 = document.querySelector('#humidity'+[i]) ;
+      var humidity_5 = document.querySelector('#humidity'+[i]);
       var img_5 = document.querySelector('#img'+[i]) ;
 
       temp_5.textContent = ` ${data.list[i*7].main.temp} ºF`;
@@ -143,29 +147,29 @@ function get_wheater_5(data){
 
 // Adding the image that best represents the general weather of the day
       if (data.list[i*7].weather[0].main == "Clear"){
-        img_5.classList.remove('hide')
-        img_5.setAttribute('src', 'Assets/weather-icons/sun.png')
-        img_5.setAttribute('alt', 'clear wheater')
+        img_5.classList.remove('hide');
+        img_5.setAttribute('src', 'Assets/weather-icons/sun.png');
+        img_5.setAttribute('alt', 'clear wheater');
       
       } else if (data.list[i*7].weather[0].main == "Clouds"){
-        img_5.classList.remove('hide')
-        img_5.setAttribute('src', 'Assets/weather-icons/cloudy.png')
-        img_5.setAttribute('alt', 'clouds')
+        img_5.classList.remove('hide');
+        img_5.setAttribute('src', 'Assets/weather-icons/cloudy.png');
+        img_5.setAttribute('alt', 'clouds');
       
       } else if (data.list[i*7].weather[0].main == "Rain"){
-        img_5.classList.remove('hide')
-        img_5.setAttribute('src', 'Assets/weather-icons/rain.png')
-        img_5.setAttribute('alt', 'rain')
+        img_5.classList.remove('hide');
+        img_5.setAttribute('src', 'Assets/weather-icons/rain.png');
+        img_5.setAttribute('alt', 'rain');
       
       } else if (data.list[i*7].weather[0].main == "Snow"){
-        img_5.classList.remove('hide')
-        img_5.setAttribute('src', 'Assets/weather-icons/snowy.png')
-        img_5.setAttribute('alt', 'snow')
+        img_5.classList.remove('hide');
+        img_5.setAttribute('src', 'Assets/weather-icons/snowy.png');
+        img_5.setAttribute('alt', 'snow');
       
       } else{
-        img_5.classList.remove('hide')
-        img_5.setAttribute('src', 'Assets/weather-icons/extreme.png')
-        img_5.setAttribute('alt', 'extreme')
+        img_5.classList.remove('hide');
+        img_5.setAttribute('src', 'Assets/weather-icons/extreme.png');
+        img_5.setAttribute('alt', 'extreme');
       }
   }
 }
@@ -174,17 +178,21 @@ function get_wheater_5(data){
 function get_city_chosen(e) {
 
 // Targeting the button that was clicked and getting it the attribute
-  var button_cities_attribute = e.target.getAttribute('data-value')
+  var button_cities_attribute = e.target.getAttribute('data-value');
   
 // City is equal the data-value that is on the button
-  city = button_cities_attribute
+  city = button_cities_attribute;
 
 // Adding the var city to the API and getting the weather of the city
   const url_api_weather = ('https://api.openweathermap.org/data/2.5/forecast?id=524901&appid=6086d1f039acf014abeacd1138429b35&units=imperial&q='+city+',EUA')
 
-  // Getting the data from the weather API using the input value
+// Getting the data from the weather API using the input value
     fetch(url_api_weather)
       .then(function (response){
+// from stackoverflow: https://stackoverflow.com/questions/38235715/fetch-reject-promise-and-catch-the-error-if-status-is-not-ok
+        if (!response.ok) {
+          alert('API error');
+        }
         return response.json();
     })
       .then(function (data){
