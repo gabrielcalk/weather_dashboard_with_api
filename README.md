@@ -1,7 +1,5 @@
 # weather_dashboard_with_api
 
-# day_planner
-
 ## *Table of Contents*
 - [Description](#description)
 - [Authors](#authors)
