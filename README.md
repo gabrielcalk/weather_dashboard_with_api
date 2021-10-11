@@ -12,7 +12,9 @@ LINK: https://gabrielcalk.github.io/weather_dashboard_with_api/
 
 ## *Description*
 
-In this project, a weather dashboard was created where the intention is to get updated data on several cities belonging to the USA. By choosing the city you want to see the weather, you can check the temperature, winds, humidity of the current day and the next 5 days.
+In this project, a weather dashboard was created where the intention is to get updated data on several cities belonging to the USA. 
+
+By choosing the city you want to see the weather, you can check the temperature, winds, humidity of the current day and the next 5 days (data is from the open weather API).
 
 In addition, local storage was used to save the cities surveyed
 
