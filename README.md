@@ -1,11 +1,13 @@
 # weather_dashboard_with_api
 
+LINK: https://gabrielcalk.github.io/weather_dashboard_with_api/
+
+
 ## *Table of Contents*
 - [Description](#description)
 - [Authors](#authors)
 - [Technologies](#technologies)
 - [Screenshots](#screenshots)
-- [Link](#link)
 
 
 ## *Description*
@@ -19,12 +21,13 @@ In addition, local storage was used to save the cities surveyed
 Gabriel Cavalcante Causin
 
 
-
 ## *Technologies*
 1) HTML
 2) CSS
-3) JavaScript
-4) Third-party API
+3) bootstrap
+4) JavaScript
+5) moment.js
+6) API
 
 
 ## *Screenshots*
@@ -33,8 +36,4 @@ Gabriel Cavalcante Causin
 ![image](https://user-images.githubusercontent.com/89816900/135914276-06affeaf-f7bf-477b-bcf9-a43c2c8a2058.png)
 ![image](https://user-images.githubusercontent.com/89816900/135914294-0abead0d-7962-4303-9205-daaf3bdf6cec.png)
 
-
-
-## *Link*
-LINK OF THE PROGRAMMING: https://gabrielcalk.github.io/weather_dashboard_with_api/
 
